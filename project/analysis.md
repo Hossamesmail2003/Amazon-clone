@@ -1,4 +1,4 @@
-rpoduct :
+poduct :
 - name
 - image
 - flag

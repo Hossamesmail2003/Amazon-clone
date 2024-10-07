@@ -19,7 +19,8 @@ class Product(models.Model):
     brand = models.ForeignKey('Brand', related_name='product_brand', on_delete=models.SET_NULL,null=True)
 
 class ProductImages(models.Model):
-    pass
+    product = models.ForeignKey(Product,related_name='product_image',on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images')
 
 class Brand(models.Model):
     name = models.CharField(max_length=100)

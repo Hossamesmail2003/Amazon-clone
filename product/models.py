@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
+from django.utils.text import slugify
 # Create your models here.
 FLAG_TYPES = (
     ('Sale','Sale'),
@@ -20,10 +21,14 @@ class Product(models.Model):
     quantity = models.IntegerField(_('Quantity'))
     brand = models.ForeignKey('Brand',verbose_name=_('Brand'), related_name='product_brand', on_delete=models.SET_NULL,null=True)
     tags = TaggableManager()
+    slug = models.SlugField(null=True,blank=True)
 
     def __str__(self):
         return self.name
-
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product,verbose_name=_('Product'),related_name='product_image',on_delete=models.CASCADE)

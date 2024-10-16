@@ -2,6 +2,16 @@ from django.shortcuts import render
 from django.views.generic import ListView , DetailView
 from .models import Product,ProductImages,Brand,Review
 
+
+
+def queryset_debug(request):
+    data = Product.objects.all()
+    return render(request,'product/debug.html',{'data':data})
+
+
+
+
+
 # Create your views here.
 class ProductList(ListView):
     model = Product

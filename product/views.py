@@ -78,6 +78,7 @@ def queryset_debug(request):
 # Create your views here.
 class ProductList(ListView):
     model = Product
+    paginate_by = 30
 
 class ProductDetail(DetailView):
     model = Product

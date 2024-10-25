@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
 from .myfilter import ProductFilter
 from .mypagination import MyPagination
@@ -36,6 +37,7 @@ class ProductListPI(generics.ListCreateAPIView):
     ordering_fields = ['price', 'quantity']
     filterset_class = ProductFilter
     pagination_class = MyPagination
+    permission_classes = [IsAuthenticated]
 
 class ProductDetailAPI(generics.RetrieveAPIView):
     queryset = Product.objects.all()

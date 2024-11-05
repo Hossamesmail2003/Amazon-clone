@@ -28,6 +28,12 @@ def add_to_cart(request):
 
 
 
+def remove_from_cart(request,id):
+    cart_detail = CartDetail.objects.get(id=id)
+    cart_detail.delete()
+    return redirect('/products/')
+
+
 
 @login_required
 def checkout(request):
